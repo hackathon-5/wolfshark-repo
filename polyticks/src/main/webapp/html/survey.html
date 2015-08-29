@@ -12,15 +12,10 @@
 		</article>
 	</div>
 	
-	<!-- TODO: Delete this sample block. Used for styling. -->
 	<footer class="survey-progress">
 		<ul class="status container">
-			<li class="finished yes">Yes</li>
-			<li class="finished no">Yes</li>
-			<li class="finished no">Yes</li>
-			<li class="finished yes">Yes</li>
-			<li class="finished neutral">Yes</li>
-			<li class=""></li>
+			<li class="finished" ng-class="{yes: response === 'Yes', no: response === 'No', neutral: response === 'Undecided'}"
+				ng-repeat="response in responses track by $index">{{ response }}</li>
 		</ul>
 	</footer>
 
