@@ -17,4 +17,5 @@ public interface SurveyService {
 	List<QuestionModel> findUnansweredQuestionsBySurveyAndUser(UUID surveyId, UUID userId);
 	List<AnswerModel> findUnansweredAnswersBySurveyAndUser(UUID surveyId, UUID userId);
 	void insertResponse(ResponseRestModel response);
+	boolean isComplete(UUID surveyId, UUID userId);
 }

@@ -11,6 +11,7 @@ import us.hexcoder.polyticks.model.QuestionModel;
 import us.hexcoder.polyticks.model.SurveyModel;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -61,5 +62,27 @@ public class SurveyServiceImpl implements SurveyService {
 	public void insertResponse(ResponseRestModel response) {
 		ResponsesRecord record = context.newRecord(RESPONSES, response);
 		record.insert();
+	}
+
+	@Override
+	public boolean isComplete(UUID surveyId, UUID userId) {
+		// We cannot complete a non-existent survey, can we?
+		if (!findById(surveyId).isPresent())
+			return false;
+
+		Integer questionCount = context.selectCount().from(QUESTIONS)
+				.join(QUESTIONS).on(QUESTIONS.SURVEY_ID.eq(SURVEYS.ID))
+				.where(SURVEYS.ID.eq(surveyId))
+				.fetchOneInto(Integer.class);
+
+		Integer responseCount = context.selectCount().from(RESPONSES)
+				.join(QUESTIONS).on(QUESTIONS.ID.eq(RESPONSES.QUESTION_ID))
+				.join(QUESTIONS).on(QUESTIONS.SURVEY_ID.eq(SURVEYS.ID))
+				.where(SURVEYS.ID.eq(surveyId))
+				.and(RESPONSES.USER_ID.eq(userId))
+				.fetchOneInto(Integer.class);
+
+		return Objects.equals(questionCount, responseCount);
+
 	}
 }

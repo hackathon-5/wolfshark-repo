@@ -29,6 +29,12 @@ public class SurveyRestController extends AbstractRestController {
 				.orElseThrow(ResourceNotFoundException::new);
 	}
 
+	@RequestMapping(value = "/{surveyId}/complete", method = RequestMethod.GET)
+	public boolean getComplete(@PathVariable("surveyId") UUID surveyId,
+							   @RequestParam("userId") UUID userId) {
+		return surveyService.isComplete(surveyId, userId);
+	}
+
 	@RequestMapping(value = "/{surveyId}/questions/unanswered", method = RequestMethod.GET)
 	public List<QuestionModel> getAllUnansweredQuestions(@PathVariable("surveyId") UUID surveyId,
 												 @PathVariable("userId") UUID userId) {
