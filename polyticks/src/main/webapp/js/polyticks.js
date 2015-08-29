@@ -12,7 +12,7 @@
 			$stateProvider
 				.state("index", {
 					url: "/",
-					templateUrl: "/html/index.html"
+					templateUrl: "/html/surveys.html"
 				})
 				.state("login", {
 					url: "/login",
@@ -23,9 +23,9 @@
 					templateUrl: "/html/surveys.html"
 				})
 				.state("survey", {
-					   url: "/surveys/:surveyId",
-					   templateUrl: "/html/survey.html"
-					   })
+				   url: "/surveys/:surveyId",
+				   templateUrl: "/html/survey.html"
+				})
 				.state("results", {
 					url: "/surveys/:surveyId/results",
 					templateUrl: "/html/results.html"
@@ -150,6 +150,14 @@
 					$scope.answers = response.data;
 					$scope.answersByQuestion = _.groupBy(response.data, "questionId");
 					initializeSurvey();
+				});
+		})
+		.controller("SurveysController", function($scope, RESTFactory) {
+			var surveyService = RESTFactory("surveys");
+
+			surveyService.getForResource("")
+				.then(function(response) {
+					$scope.surveys = response.data;
 				});
 		})
 		.controller("ResultsController", function($scope, $stateParams, RESTFactory) {

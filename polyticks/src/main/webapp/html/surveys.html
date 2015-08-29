@@ -1,29 +1,15 @@
 <section id="surveys" ng-controller="SurveysController" ng-if="currentUser">
-
 	<div class="container">
-		
 		<div class="row">
-			
 			<div class="col-xs-12"><h1>Choose a Survey</h1></div>
 			
-			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 survey-card">
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 survey-card" ng-repeat="survey in surveys">
 				<div class="inner">
-					<h2>National</h2>
-					<p>See how you compare on national issues</p>
-					<p><a class="btn btn-gold">Take Survey</a></p>
+					<h2>{{ survey.name }}</h2>
+					<p>{{ survey.description }}</p>
+					<p><a class="btn btn-gold" href="#/surveys/{{ survey.id }}">Take Survey</a></p>
 				</div>
 			</div>
-
-			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 survey-card">
-				<div class="inner">
-					<h2>South Carolina</h2>
-					<p>See how you compare on state issues</p>
-					<p><a class="btn btn-outline">View Results</a></p>
-				</div>
-			</div>
-
 		</div>
-		
 	</div>
-
 </section>

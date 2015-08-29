@@ -15,6 +15,7 @@ import java.util.UUID;
  */
 public interface SurveyService {
 	Optional<SurveyModel> findById(UUID surveyId);
+	List<SurveyModel> findAll();
 	List<QuestionModel> findQuestionsBySurvey(UUID surveyId);
 	List<QuestionModel> findUnansweredQuestionsBySurveyAndUser(UUID surveyId, UUID userId);
 	List<AnswerModel> findAnswersBySurvey(UUID surveyId);

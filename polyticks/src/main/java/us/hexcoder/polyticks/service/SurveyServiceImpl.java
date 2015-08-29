@@ -36,6 +36,12 @@ public class SurveyServiceImpl implements SurveyService {
 	}
 
 	@Override
+	public List<SurveyModel> findAll() {
+		return context.selectFrom(SURVEYS)
+				.fetchInto(SurveyModel.class);
+	}
+
+	@Override
 	public List<QuestionModel> findQuestionsBySurvey(UUID surveyId) {
 		return context.select(QUESTIONS.fields()).from(SURVEYS)
 				.join(QUESTIONS).on(QUESTIONS.SURVEY_ID.eq(SURVEYS.ID))

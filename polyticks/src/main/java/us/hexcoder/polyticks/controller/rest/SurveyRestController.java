@@ -25,6 +25,11 @@ public class SurveyRestController extends AbstractRestController {
 	@Autowired
 	private SurveyService surveyService;
 
+	@RequestMapping(method = RequestMethod.GET)
+	public List<SurveyModel> getAll() {
+		return surveyService.findAll();
+	}
+
 	@RequestMapping(value = "/{surveyId}", method = RequestMethod.GET)
 	public SurveyModel getById(@PathVariable("surveyId") UUID surveyId) {
 		return surveyService.findById(surveyId)
