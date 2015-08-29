@@ -114,3 +114,10 @@ Temporary Items
 
 # Custom #
 *.css
+
+
+# Project helpers #
+*.xcuserstate
+*.xccheckout
+*.xcworkspacedata
+*.codekit

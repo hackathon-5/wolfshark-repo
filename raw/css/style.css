@@ -1,0 +1,129 @@
+/***** VARIABLES *****/
+/***** COMMON *****/
+html,
+body {
+  background: #eeeae0;
+}
+.container-narrow {
+  max-width: 320px;
+}
+.btn {
+  display: block;
+  color: #7d3b00;
+  border: 1px solid #7d3b00;
+  padding: 1em;
+  width: 100%;
+  border-radius: 0;
+}
+.btn.btn-gold {
+  background: #deb408;
+  color: #eeeae0;
+  border: none;
+}
+.form-group.textbox label {
+  display: block;
+  width: 1em;
+  height: 1em;
+  float: right;
+  text-indent: -9999px;
+  color: #000077;
+  margin-bottom: -1em;
+}
+.form-group.textbox label:after {
+  text-indent: 0;
+  color: inherit;
+  float: right;
+}
+.form-group.textbox label.edit:after {
+  content: "\f040";
+  font-family: FontAwesome;
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
+.form-group.textbox label.drop:after {
+  content: "\f0d7";
+  font-family: FontAwesome;
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
+.form-group.textbox input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #fff;
+  border-radius: 0;
+  box-shadow: none !important;
+  color: #000077;
+  outline: none !important;
+}
+/***** PROFILE *****/
+.user-mugshot {
+  border-radius: 100%;
+  overflow: hidden;
+  border: 0.25em solid #deb408;
+}
+.user-mugshot img {
+  width: 100%;
+  height: auto;
+}
+#register {
+  text-align: center;
+}
+#register .user-mugshot {
+  width: 65%;
+  margin: 0 auto;
+}
+#register .form-group input {
+  text-align: center;
+}
+.user-dashboard {
+  text-align: center;
+}
+.attributes-overview .progress {
+  background: none;
+  border-radius: 0;
+  height: 4px;
+  box-shadow: none;
+}
+.attributes-overview .conservative .progress-bar {
+  margin-left: 50%;
+  margin-right: auto;
+  background: #991111;
+}
+.attributes-overview .liberal .progress-bar {
+  margin-right: 50%;
+  margin-left: auto;
+  background: #000077;
+  float: right;
+}
+.matches-overview .comparison {
+  text-align: center;
+}
+.matches-overview .comparison .candidate {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  width: 90px;
+  margin: 8px;
+}
+.matches-overview .comparison .candidate img {
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  margin: 30px 0 15px 0;
+  position: relative;
+  z-index: 1;
+}
+.matches-overview .comparison .candidate .candidate-chart {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  margin-left: -45px;
+  top: 15px;
+  left: 50%;
+}
