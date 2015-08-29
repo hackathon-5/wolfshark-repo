@@ -15,6 +15,7 @@ import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.web.context.request.NativeWebRequest;
 import us.hexcoder.polyticks.repository.JooqUsersConnectionRepository;
@@ -33,6 +34,11 @@ public class SocialConfiguration implements SocialConfigurer {
 	@Value("${social.facebook.privateKey}")
 	private String facebookPrivateKey;
 
+	@Value("${social.github.publicKey}")
+	private String githubPublicKey;
+	@Value("${social.github.privateKey}")
+	private String githubPrivateKey;
+
 	@Autowired
 	private DSLContext context;
 	@Autowired
@@ -41,6 +47,7 @@ public class SocialConfiguration implements SocialConfigurer {
 	@Override
 	public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
 		connectionFactoryConfigurer.addConnectionFactory(new FacebookConnectionFactory(facebookPublicKey, facebookPrivateKey));
+		connectionFactoryConfigurer.addConnectionFactory(new GitHubConnectionFactory(githubPublicKey, githubPrivateKey));
 		// TODO: Add more social configurations?
 	}
 

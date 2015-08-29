@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
 		return findCurrentUserId()
 				.map(userId -> context.select().from(USERS)
 						.join(USERS_CONNECTIONS).on(USERS_CONNECTIONS.USER_ID.eq(USERS.ID))
+						.where(USERS.ID.eq(userId))
 						.fetchOne())
 				.map(record -> record.map(USER_DTO_MAPPER));
 	}
