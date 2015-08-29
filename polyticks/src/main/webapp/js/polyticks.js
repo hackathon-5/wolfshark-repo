@@ -72,9 +72,14 @@
 		});
 
 	polyticksModule
-		.controller("RootController", function($scope, $state, $location, RESTFactory) {
+		.controller("RootController", function($scope, $rootScope, $state, $location, RESTFactory) {
 			var userService = RESTFactory("users");
 
+			$scope.bodyclass = '';
+			$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+			   $scope.bodyclass = toState.name;
+		    });
+					
 			userService.getForResource("/current")
 				.error(function(content, response) {
 					if (response === 404 && $location.url() !== "/login") {

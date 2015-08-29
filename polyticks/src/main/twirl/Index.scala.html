@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	</head>
-	<body ng-controller="RootController">
+	<body ng-controller="RootController" class="{{ bodyclass }}">
 		<header id="wrapHeader">
 			<div class="logo"><a href="/">Polyticks</a></div>
 		</header>
@@ -24,9 +24,9 @@
 			<nav id="main-nav">
 				<a class="hidden-md hidden-lg menu-toggle"></a>
 				<ul class="menu">
-					<li class="profile"><a href="#profile">Profile</a></li>
-					<li class="candidates"><a href="#candidates">Candidates</a></li>
-					<li class="issues"><a href="#issues">Issues</a></li>
+					<li class="profile" ng-class="{'active': bodyclass == 'profile' }"><a href="#profile">Profile</a></li>
+					<li class="candidates" ng-class="{'active': bodyclass == 'candidates' }"><a href="#candidates">Candidates</a></li>
+					<li class="issues" ng-class="{'active': bodyclass == 'issues' }"><a href="#issues">Issues</a></li>
 				</ul>
 			</nav>
 		</footer>
