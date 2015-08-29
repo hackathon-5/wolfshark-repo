@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
 				.withUsername(user.getUsername())
 				.withName(user.getFullName())
 				.withRoles(roles)
-				.withProvider(Provider.TWITTER)
+				.withProvider(Provider.FACEBOOK)
 				.build();
 	}
 

@@ -1,1 +1,165 @@
-html {}
+/***** VARIABLES *****/
+
+@gold: #deb408;
+@red: #991111;
+@blue: #000077;
+@white: #eeeae0;
+@brown: #7d3b00;
+
+.fa-icon(@content) {
+	content: @content;
+	font-family: FontAwesome;
+	display: inline-block;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transform: translate(0, 0);
+}
+
+/***** COMMON *****/
+
+html, body {
+	background: @white;
+}
+.container-narrow {
+	max-width: 320px;
+}
+.btn {
+	display: block;
+	color: @brown;
+	border: 1px solid @brown;
+	padding: 1em;
+	width: 100%;
+	border-radius: 0;
+
+	&.btn-gold {
+		background: @gold;
+		color: @white;
+		border: none;
+	}
+}
+
+
+.form-group.textbox {
+
+	label {
+		display: block;
+		width: 1em;
+		height: 1em;
+		float: right;
+		text-indent: -9999px;
+		color: @blue;
+		margin-bottom: -1em;
+
+		&:after {
+			text-indent: 0;
+			color: inherit;
+			float: right;
+		}
+		&.edit:after {
+			.fa-icon("\f040");
+		}
+		&.drop:after {
+			.fa-icon("\f0d7");
+		}
+	}
+	input {
+		background: none;
+		border: none;
+		border-bottom: 1px solid #fff;
+		border-radius: 0;
+		box-shadow: none !important;
+		color: @blue;
+		outline: none !important;
+	}
+
+}
+
+
+/***** PROFILE *****/
+
+.user-mugshot {
+
+	border-radius: 100%;
+	overflow: hidden;
+	border: .25em solid @gold;
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+
+#register {
+	text-align: center;
+
+	.user-mugshot {
+		width: 65%;
+		margin: 0 auto;
+	}
+	.form-group {
+		input {
+			text-align: center;
+		}
+	}
+}
+
+.user-dashboard {
+	text-align: center;
+}
+
+.attributes-overview {
+
+	.progress {
+		background: none;
+		border-radius: 0;
+		height: 4px;
+		box-shadow: none;
+	}
+	.conservative .progress-bar {
+		margin-left: 50%;
+		margin-right: auto;
+		background: @red;
+	}
+	.liberal .progress-bar {
+		margin-right: 50%;
+		margin-left: auto;
+		background: @blue;
+		float: right;
+	}
+
+}
+
+.matches-overview {
+
+	.comparison {
+		text-align: center;
+
+		.candidate {
+			display: inline-block;
+			vertical-align: top;
+			position: relative;
+			width: 90px;
+			margin: 8px;
+
+			img {
+				border-radius: 100%;
+				width: 60px;
+				height: 60px;
+				margin: 30px 0 15px 0;
+				position: relative;
+				z-index: 1;
+			}
+			.candidate-chart {
+				position: absolute;
+				width: 90px;
+				height: 90px;
+				margin-left: -45px;
+				top: 15px;
+				left: 50%;
+			}
+		}
+	}
+
+}

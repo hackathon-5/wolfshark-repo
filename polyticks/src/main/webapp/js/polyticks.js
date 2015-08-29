@@ -19,8 +19,12 @@
 					templateUrl: "/html/login.html"
 				})
 				.state("survey", {
-					url: "/survey/:surveyId",
+					url: "/surveys/:surveyId",
 					templateUrl: "/html/survey.html"
+				})
+				.state("results", {
+					url: "/surveys/:surveyId/results",
+					templateUrl: "/html/results.html"
 				})
 				;
 		});
@@ -47,7 +51,7 @@
 							.error(errorRedirect);
 					},
 					postForResource: function (resource, parameters) {
-						if (!parameters) {
+						if (parameters) {
 							return $http.post(base + resource, JSON.stringify(parameters))
 								.error(errorRedirect);
 						} else {
@@ -79,26 +83,58 @@
 		.controller("LoginController", function($scope) {
 
 		})
-		.controller("SurveyController", function ($scope, $stateParams, RESTFactory) {
+		.controller("SurveyController", function ($scope, $state, $stateParams, RESTFactory) {
 			var surveyService = RESTFactory("surveys");
 
-			var initializeSurvey = function() {};
+			var initializeSurvey = function() {
+				if ($scope.survey && $scope.questions && $scope.answers) {
+					// The survey is ready
+				}
+			};
+			var completeSurvey = function() {
+				if ($scope.questionIndex >= $scope.questions.length) {
+					$state.go("results", {surveyId: $stateParams["surveyId"]});
+				}
+			};
+
+			$scope.questionIndex = 0;
+			$scope.answerQuestion = function(answer) {
+				$scope.questionIndex++;
+				var response = {
+					userId: $scope.currentUser.user.id,
+					answerId: answer.id,
+					questionId: answer.questionId
+				};
+
+				surveyService.postForResource("/" + $stateParams["surveyId"] + "/response", response)
+					.then(function() {
+						completeSurvey();
+					});
+			};
 
 			surveyService.getForResource("/" + $stateParams["surveyId"])
 				.then(function(response) {
 					$scope.survey = response.data;
 					initializeSurvey();
 				});
-			surveyService.getForResource("/" + $stateParams["surveyId"] + "/questions/unanswered?userId" + $scope.currentUser.user.id)
+			surveyService.getForResource("/" + $stateParams["surveyId"] + "/questions/unanswered?userId=" + $scope.currentUser.user.id)
 				.then(function(response) {
 					$scope.questions = response.data;
 					initializeSurvey();
 				});
-			surveyService.getForResource("/" + $stateParams["surveyId"] + "/answers/unanswered?userId" + $scope.currentUser.user.id)
+			surveyService.getForResource("/" + $stateParams["surveyId"] + "/answers/unanswered?userId=" + $scope.currentUser.user.id)
 				.then(function (response) {
 					$scope.answers = response.data;
+					$scope.answersByQuestion = _.groupBy(response.data, "questionId");
 					initializeSurvey();
 				});
+		})
+		.controller("ResultsController", function($scope, $stateParams, RESTFactory) {
+			// TODO: Get survey/user responses
+			// TODO: Get candidates
+			// TODO: Get candidate responses
+
+			// TODO: Calculate comparison to candidates vs. user
 		})
 		;
 })(angular, _);

@@ -9,11 +9,26 @@
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-		@*<link rel="stylesheet" type="text/css" href="" />*@
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	</head>
 	<body ng-controller="RootController">
-		<div ui-view></div>
+		<header id="wrapHeader">
+			<div class="logo"><a href="/">Polyticks</a></div>
+			<nav id="main-nav">
+				<a class="hidden-md hidden-lg menu-toggle"></a>
+				<ul class="menu">
+					<li class="profile"><a href="#profile">Profile</a></li>
+					<li class="survey"><a href="#survey">Survey</a></li>
+					<li class="results"><a href="#results">Results</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="wrapContent" ui-view></main>
+
+		<footer id="wrapFooter"></footer>
 	</body>
 
 	<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -21,7 +36,7 @@
 	<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
 	<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+	<script type="application/javascript" src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 	<script type="application/javascript" src="/js/polyticks.js"></script>
-	@*<script type="application/javascript" src=""></script>*@
 </html>
 

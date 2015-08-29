@@ -1,0 +1,119 @@
+<section id="profile" ng-controller="ResultsController">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4 col-md-3 user-profile">
+				<div class="user-mugshot">
+					<img ng-src="{{ currentUser.connection.imageUrl }}" />
+				</div>
+
+				<div class="user-name">{{ currentUser.user.fullName }}</div>
+
+				<!--<h3>Profile Information</h3>-->
+				<!--<ul class="profile-information">-->
+					<!--<li class="email">user@@emaildomain.com</li>-->
+					<!--<li class="city">Mount Pleasant</li>-->
+					<!--<li class="state">South Carolina</li>-->
+				<!--</ul>-->
+			</div>
+
+			<div class="col-xs-12 col-sm-6 col-md-5 col-sm-push-1 col-md-push-2 user-dashboard">
+				<div class="attributes-overview">
+					<h2>On the Issues</h2>
+
+					<div class="attribute defense conservative">
+						<h4>Defense</h4>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+								<span class="sr-only">10% Conservative</span>
+							</div>
+						</div>
+					</div>
+					<div class="attribute diplomacy liberal">
+						<h4>Diplomacy</h4>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+								<span class="sr-only">10% Liberal</span>
+							</div>
+						</div>
+					</div>
+					<div class="attribute economy conservative">
+						<h4>Economy</h4>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+								<span class="sr-only">40% Conservative</span>
+							</div>
+						</div>
+					</div>
+					<div class="attribute education moderate">
+						<h4>Education</h4>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+								<span class="sr-only">Moderate</span>
+							</div>
+						</div>
+					</div>
+					<div class="attribute social liberal">
+						<h4>Social</h4>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+								<span class="sr-only">30% Liberal</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="matches-overview">
+					<h2>Top Comparisons</h2>
+
+					<div class="comparison">
+						<h4>Presidents</h4>
+						<div class="candidate">
+							<div class="candidate-chart" id="trump"></div>
+							<img src="img/trump.jpg" />
+							<h5>Donald Trump</h5>
+						</div>
+						<div class="candidate">
+							<div class="candidate-chart" id="fiorina"></div>
+							<img src="img/fiorina.jpg" />
+							<h5>Carly Fiorina</h5>
+						</div>
+						<div class="candidate">
+							<div class="candidate-chart" id="rubio"></div>
+							<img src="img/rubio.jpg" />
+							<h5>Marco Rubio</h5>
+						</div>
+						<script>
+							new Chartist.Pie('#trump', {
+								series: [72, 64, 84, 36, 92, 52]
+							}, {
+								donut: true,
+								donutWidth: 20,
+								startAngle: 270,
+								total: 0,
+								showLabel: false
+							});
+							new Chartist.Pie('#fiorina', {
+								series: [84, 36, 92, 72, 64, 52]
+							}, {
+								donut: true,
+								donutWidth: 20,
+								startAngle: 270,
+								total: 0,
+								showLabel: false
+							});
+							new Chartist.Pie('#rubio', {
+								series: [36, 92, 52, 72, 64, 84]
+							}, {
+								donut: true,
+								donutWidth: 20,
+								startAngle: 270,
+								total: 0,
+								showLabel: false
+							});
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

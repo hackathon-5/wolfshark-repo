@@ -1,0 +1,24 @@
+<section class="container container-narrow" id="survey" ng-controller="SurveyController" ng-if="currentUser">
+	<article class="survey-item">
+		<h2 class="survey-question">{{ questions[questionIndex].text }}</h2>
+		<div class="survey-answers">
+
+
+			<div class="form-group radio" ng-repeat="answer in answersByQuestion[questions[questionIndex].id]">
+				<input type="radio" id="answer-disagree" ng-click="answerQuestion(answer)" name="question" />
+				<label for="answer-disagree"  ng-click="answerQuestion(answer)">{{ answer.text }}</label>
+			</div>
+		</div>
+	</article>
+
+	<footer class="survey-progress" style="display: none;">
+		<ul>
+			<li ng-repeat="result in results track by $index" ng-class="{ 'finished': true }"
+				data-value="{{ result.answer.ordering }}">
+				<a href="#{{ result.question.id }}">
+					<span class="question-data">{{ result.question.question }}<strong>{{ result.answer.answer }}</strong></span>
+				</a>
+			</li>
+		</ul>
+	</footer>
+</section>

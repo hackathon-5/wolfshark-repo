@@ -16,6 +16,7 @@ import java.util.UUID;
 /**
  * Created by 67726e on 8/29/15.
  */
+@RestController
 @RequestMapping("/rest/surveys")
 public class SurveyRestController extends AbstractRestController {
 	@Autowired
@@ -37,19 +38,19 @@ public class SurveyRestController extends AbstractRestController {
 
 	@RequestMapping(value = "/{surveyId}/questions/unanswered", method = RequestMethod.GET)
 	public List<QuestionModel> getAllUnansweredQuestions(@PathVariable("surveyId") UUID surveyId,
-												 @PathVariable("userId") UUID userId) {
+														 @RequestParam("userId") UUID userId) {
 		return surveyService.findUnansweredQuestionsBySurveyAndUser(surveyId, userId);
 	}
 
 	@RequestMapping(value = "/{surveyId}/answers/unanswered", method = RequestMethod.GET)
 	public List<AnswerModel> getAllAnswersForUnansweredQuestions(@PathVariable("surveyId") UUID surveyId,
-																  @RequestParam("userId") UUID userId) {
+																 @RequestParam("userId") UUID userId) {
 		return surveyService.findUnansweredAnswersBySurveyAndUser(surveyId, userId);
 	}
 
-	@RequestMapping(value = "/{surveyId}/responses", method = RequestMethod.POST)
+	@RequestMapping(value = "/{surveyId}/response", method = RequestMethod.POST)
 	public boolean postCreateResponse(@PathVariable("surveyId") UUID surveyId,
-								   @RequestBody ResponseRestModel response) {
+									  @RequestBody ResponseRestModel response) {
 		UUID currentUserId = userService.findCurrentUserId()
 				.orElseThrow(ResourceNotFoundException::new);
 
