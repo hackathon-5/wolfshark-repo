@@ -1,11 +1,15 @@
 package us.hexcoder.polyticks.repository;
 
 import com.google.common.collect.Lists;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.impl.DSL;
 import org.springframework.social.connect.*;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.github.api.impl.GitHubTemplate;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import us.hexcoder.polyticks.constant.Constants;
@@ -229,6 +233,10 @@ public class JooqConnectionRepository implements ConnectionRepository {
 
 			if (provider.isPresent()) {
 				switch (provider.get()) {
+					case GITHUB:
+						return Optional.ofNullable(getGitHubImageUrl(connectionData));
+					case FACEBOOK:
+						return Optional.ofNullable(getFacebookImageUrl(connectionData));
 					default:
 						return Optional.ofNullable(connectionData.getImageUrl());
 				}
@@ -236,5 +244,41 @@ public class JooqConnectionRepository implements ConnectionRepository {
 		} catch (Exception ignored) {}
 
 		return Optional.ofNullable(connectionData.getImageUrl());
+	}
+
+	private String getGitHubImageUrl(ConnectionData connectionData) {
+		GitHubTemplate template = new GitHubTemplate(connectionData.getAccessToken());
+
+		String imageJson = template.restOperations().getForObject("https://api.github.com/user", String.class);
+
+		// {
+		//	"avatar_url": "..."
+		// }
+
+		JsonParser parser = new JsonParser();
+		JsonObject object = parser.parse(imageJson).getAsJsonObject();
+
+		return object.get("avatar_url").getAsString();
+	}
+
+	private String getFacebookImageUrl(ConnectionData connectionData) {
+		FacebookTemplate template = new FacebookTemplate(connectionData.getAccessToken());
+
+		String imageJson = template.restOperations().getForObject(
+				String.format("https://graph.facebook.com/%s/picture?width=400&height=400&redirect=false",
+						connectionData.getProviderUserId()), String.class);
+
+		// {"data":
+		// 	{"height":480,
+		// 	 "is_silhouette":false,
+		// 	 "url":"...",
+		// 	 "width":480
+		// 	}
+		// }
+
+		JsonParser parser = new JsonParser();
+		JsonObject object = parser.parse(imageJson).getAsJsonObject();
+
+		return object.get("data").getAsJsonObject().get("url").getAsString();
 	}
 }
