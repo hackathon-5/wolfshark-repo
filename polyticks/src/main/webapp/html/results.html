@@ -32,25 +32,16 @@
 
 					<div class="comparison">
 						<h4>Presidents</h4>
+
 						<div class="candidates">
-							<div class="candidate">
-								<div class="candidate-chart" id="trump"></div>
-								<!--<img src="img/trump.jpg" />-->
-								<h5>Donald Trump</h5>
-							</div>
-							<div class="candidate">
-								<div class="candidate-chart" id="fiorina"></div>
-								<!--<img src="img/fiorina.jpg" />-->
-								<h5>Carly Fiorina</h5>
-							</div>
-							<div class="candidate">
-								<div class="candidate-chart" id="rubio"></div>
-								<!--<img src="img/rubio.jpg" />-->
-								<h5>Marco Rubio</h5>
+							<div class="candidate" ng-repeat="candidate in candidates">
+								<div class="candidate-chart" id="candidate_{{ $index }}"></div>
+								<img ng-src="images/{{ candidate.id }}.jpg" />
+								<h5>{{ candidate.fullName }} ({{ comparisonByCandidate[candidate.id].percent }}%)</h5>
 							</div>
 						</div>
 						<script>
-							new Chartist.Pie('#trump', {
+							new Chartist.Pie('#candidate_1', {
 								series: [72, 64, 84, 36, 92, 52]
 							}, {
 								donut: true,
@@ -59,7 +50,7 @@
 								total: 0,
 								showLabel: false
 							});
-							new Chartist.Pie('#fiorina', {
+							new Chartist.Pie('#candidate_2', {
 								series: [84, 36, 92, 72, 64, 52]
 							}, {
 								donut: true,
@@ -68,7 +59,7 @@
 								total: 0,
 								showLabel: false
 							});
-							new Chartist.Pie('#rubio', {
+							new Chartist.Pie('#candidate_3', {
 								series: [36, 92, 52, 72, 64, 84]
 							}, {
 								donut: true,

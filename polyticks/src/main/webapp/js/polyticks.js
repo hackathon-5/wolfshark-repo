@@ -195,12 +195,9 @@
 							return response.answerId;
 						})];
 					}));
-
 					var answerIds = _.map($scope.responses, function(response) {
 						return response.answerId;
 					});
-
-					// TODO: Put me into the scope and do something!!!!
 					var comparisonByCandidate = _.object(_.map(answersByCandidate, function(candidateAnswerIds, candidateId) {
 						var matches = _.intersection(answerIds, candidateAnswerIds).length;
 						var percent = Math.ceil((matches / answerIds.length) * 100);
@@ -210,6 +207,8 @@
 							percent: percent
 						}];
 					}));
+
+					$scope.comparisonByCandidate = comparisonByCandidate;
 				}
 			};
 
