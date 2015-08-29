@@ -27,7 +27,7 @@ import us.hexcoder.twirl.view.TwirlView;
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 	private static final String APPLICATION_ENVIRONMENT_VARIABLE = "APP_ENV";
 	private static final String PROPERTY_ENCRYPTION_ALGORITHM = "PBEWithMD5AndDES";
-	private static final String PROPERTY_ENCRYPTION_VARIABLE = "ECHOVATE_PROPERTY_PASSWORD";
+	private static final String PROPERTY_ENCRYPTION_VARIABLE = "POLYTICKS_PROPERTY_PASSWORD";
 
 	@Bean
 	public static EnvironmentStringPBEConfig setupEnvironmentStringPBEConfig(Environment environment) {

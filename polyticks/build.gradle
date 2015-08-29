@@ -21,6 +21,9 @@ buildscript {
                 classpath "com.github.marceloemanoel:gradle-migrations:0.2.1"
                 classpath "de.obqo.gradle:gradle-lesscss-plugin:1.0-1.3.3"
                 classpath ("nu.studer:gradle-jooq-plugin:1.0.5") { exclude group: "org.jooq" }
+				classpath "org.jooq:jooq:${jooqVersion}"
+				classpath "org.jooq:jooq-meta:${jooqVersion}"
+				classpath "org.jooq:jooq-codegen:${jooqVersion}"
                 classpath "org.postgresql:postgresql:9.3-1102-jdbc41"
                 classpath "org.akhikhl.gretty:gretty:+"
         }
@@ -98,6 +101,32 @@ dependencies {
 
 	// Container provided libraries
 	providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+
+	// Migrations
+	migrationsDriver "org.postgresql:postgresql:9.3-1102-jdbc41"
+}
+
+// See: https://github.com/etiennestuder/gradle-jooq-plugin
+jooq {
+	polyticks(sourceSets.main) {
+		jdbc {
+			driver = "org.postgresql.Driver"
+			url = "jdbc:postgresql://localhost/polyticks"
+			user = "polyticks"
+			password = "polyticks"
+		}
+
+		generator {
+			database {
+				name = "org.jooq.util.postgres.PostgresDatabase"
+				inputSchema = "public"
+			}
+
+			target {
+				packageName = "us.hexcoder.polyticks.jooq"
+			}
+		}
+	}
 }
 
 // See: https://github.com/obecker/gradle-lesscss-plugin
