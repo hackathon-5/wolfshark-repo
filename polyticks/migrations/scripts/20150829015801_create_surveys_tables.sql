@@ -32,7 +32,8 @@ CREATE TABLE responses(
 	PRIMARY KEY(id),
 	FOREIGN KEY (answer_id) REFERENCES answers(id),
 	FOREIGN KEY (question_id) REFERENCES questions(id),
-	FOREIGN KEY (user_id) REFERENCES users(id)
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	UNIQUE (question_id, user_id)
 );
 
 CREATE TABLE surveys_taken(

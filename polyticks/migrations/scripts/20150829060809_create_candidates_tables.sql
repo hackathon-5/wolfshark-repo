@@ -17,7 +17,8 @@ CREATE TABLE candidates_responses(
 	PRIMARY KEY(id),
 	FOREIGN KEY (question_id) REFERENCES questions(id),
 	FOREIGN KEY (answer_id) REFERENCES answers(id),
-	FOREIGN KEY (candidate_id) REFERENCES candidates(id)
+	FOREIGN KEY (candidate_id) REFERENCES candidates(id),
+	UNIQUE (question_id, candidate_id)
 );
 
 --//@UNDO
