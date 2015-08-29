@@ -41,6 +41,13 @@ html, body {
 	}
 }
 
+h1 {
+	font-size: 400%;
+	color: @red;
+	font-weight: 300;
+	line-height: .8em;
+	margin-bottom: .5em;
+}
 h2 {
 	font-size: 150%;
 }
@@ -142,6 +149,10 @@ h5 {
 #wrapContent {
 	padding-top: 6em;
 	padding-bottom: 3em;
+	min-height: 100vh;
+}
+.login #wrapContent {
+	background: url(/images/bg-map.jpg) no-repeat 50% 50%;
 }
 
 .form-group.textbox {
@@ -177,6 +188,24 @@ h5 {
 		outline: none !important;
 	}
 	
+}
+
+
+/***** LOGIN *****/
+
+#login {
+	.container-narrow {
+		padding-top: 8em;
+		text-align: center;
+	}
+	p {
+		font-size: 135%;
+		color: @blue;
+		margin: 1em 0;
+	}
+	.btn {
+		margin: 1em 0;
+	}
 }
 
 
