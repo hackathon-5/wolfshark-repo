@@ -16,7 +16,7 @@
 					<h5 class="liberal-key">Liberal</h5>
 					<h5 class="conservative-key">Conservative</h5>
 
-					<div class="attribute {{ category.name.toLowerCase() }} leaningByCategory[category.id].leaning" ng-repeat="category in categories">
+					<div class="attribute {{ category.name.toLowerCase() }} {{ leaningByCategory[category.id].leaning }}" ng-repeat="category in categories">
 						<h5>{{ category.name }}</h5>
 						<div class="progress">
 							<div class="progress-bar" role="progressbar" aria-valuenow="{{ leaningByCategory[category.id].percent }}"
