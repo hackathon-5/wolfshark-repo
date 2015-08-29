@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by 67726e on 8/28/15.
  */
 public enum Provider {
-	TWITTER,
+	GITHUB,
 	FACEBOOK;
 
 	private static final Set<Provider> PROVIDERS = EnumSet.allOf(Provider.class);
