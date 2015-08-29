@@ -39,6 +39,30 @@ html, body {
 		color: @white;
 		border: none;
 	}
+	&.btn-social {
+		color: #fff !important;
+		border: none;
+		
+		&.facebook {
+			background: #3b5998;
+			
+			&:before {
+				.fa-icon("\f09a");
+			}
+		}
+		&.github {
+			background: #555;
+			
+			&:before {
+				.fa-icon("\f09b");
+			}
+		}
+		&:before {
+			padding-right: 1em;
+			border-right: 1px solid #fff;
+			margin-right: 1em;
+		}
+	}
 }
 
 h1 {
