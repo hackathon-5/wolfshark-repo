@@ -1,0 +1,14 @@
+apply plugin: "idea"
+
+// See: http://www.gradle.org/docs/current/userguide/idea_plugin.html
+idea {
+	project {
+		jdkName = "1.8"
+		languageLevel = "1.8"
+	}
+
+	module {
+		downloadSources = true
+	}
+}
+
