@@ -6,6 +6,7 @@ import us.hexcoder.polyticks.controller.rest.model.ResponseRestModel;
 import us.hexcoder.polyticks.exception.ResourceNotFoundException;
 import us.hexcoder.polyticks.model.AnswerModel;
 import us.hexcoder.polyticks.model.QuestionModel;
+import us.hexcoder.polyticks.model.ResponseModel;
 import us.hexcoder.polyticks.model.SurveyModel;
 import us.hexcoder.polyticks.service.SurveyService;
 import us.hexcoder.polyticks.service.UserService;
@@ -46,6 +47,12 @@ public class SurveyRestController extends AbstractRestController {
 	public List<AnswerModel> getAllAnswersForUnansweredQuestions(@PathVariable("surveyId") UUID surveyId,
 																 @RequestParam("userId") UUID userId) {
 		return surveyService.findUnansweredAnswersBySurveyAndUser(surveyId, userId);
+	}
+
+	@RequestMapping(value = "/{surveyId}/responses", method = RequestMethod.GET)
+	public List<ResponseModel> getAllResponsesBySurvey(@PathVariable("surveyId") UUID surveyId,
+													   @RequestParam("userId") UUID userId) {
+		return surveyService.findResponsesBySurveyAndUser(surveyId, userId);
 	}
 
 	@RequestMapping(value = "/{surveyId}/response", method = RequestMethod.POST)

@@ -8,6 +8,7 @@ import us.hexcoder.polyticks.controller.rest.model.ResponseRestModel;
 import us.hexcoder.polyticks.jooq.tables.records.ResponsesRecord;
 import us.hexcoder.polyticks.model.AnswerModel;
 import us.hexcoder.polyticks.model.QuestionModel;
+import us.hexcoder.polyticks.model.ResponseModel;
 import us.hexcoder.polyticks.model.SurveyModel;
 
 import java.util.List;
@@ -55,6 +56,17 @@ public class SurveyServiceImpl implements SurveyService {
 						context.select(RESPONSES.QUESTION_ID).from(RESPONSES).where(RESPONSES.USER_ID.eq(userId))
 				))
 				.fetchInto(AnswerModel.class);
+	}
+
+	@Override
+	public List<ResponseModel> findResponsesBySurveyAndUser(UUID surveyId, UUID userId) {
+		return context.select(RESPONSES.fields()).from(SURVEYS)
+				.join(QUESTIONS).on(QUESTIONS.SURVEY_ID.eq(SURVEYS.ID))
+				.join(ANSWERS).on(ANSWERS.QUESTION_ID.eq(QUESTIONS.ID))
+				.join(RESPONSES).on(RESPONSES.ANSWER_ID.eq(ANSWERS.ID))
+				.where(SURVEYS.ID.eq(surveyId))
+				.and(RESPONSES.USER_ID.eq(userId))
+				.fetchInto(ResponseModel.class);
 	}
 
 	@Override

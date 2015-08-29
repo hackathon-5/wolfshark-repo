@@ -101,7 +101,9 @@
 
 			var initializeSurvey = function() {
 				if ($scope.survey && $scope.questions && $scope.answers) {
-					// The survey is ready
+					if ($scope.questions.length === 0) {
+						$state.go("results", {surveyId: $stateParams["surveyId"]});
+					}
 				}
 			};
 			var completeSurvey = function() {
@@ -143,11 +145,50 @@
 				});
 		})
 		.controller("ResultsController", function($scope, $stateParams, RESTFactory) {
-			// TODO: Get survey/user responses
-			// TODO: Get candidates
-			// TODO: Get candidate responses
+			var surveyService = RESTFactory("surveys");
+			var candidateService = RESTFactory("candidates");
 
-			// TODO: Calculate comparison to candidates vs. user
+			var initializeResults = function() {
+				if ($scope.responses && $scope.candidates && $scope.candidateResponses) {
+					var answersByCandidate = _.object(_.map(_.groupBy($scope.candidateResponses, "candidateId"),
+						function(responses, candidateId) {
+						return [candidateId, responses.map(function(response) {
+							return response.answerId;
+						})];
+					}));
+
+					var answerIds = _.map($scope.responses, function(response) {
+						return response.answerId;
+					});
+
+					// TODO: Put me into the scope and do something!!!!
+					var comparisonByCandidate = _.object(_.map(answersByCandidate, function(candidateAnswerIds, candidateId) {
+						var matches = _.intersection(answerIds, candidateAnswerIds).length;
+						var percent = Math.ceil((matches / answerIds.length) * 100);
+
+						return [candidateId, {
+							matches: matches,
+							percent: percent
+						}];
+					}));
+				}
+			};
+
+			surveyService.getForResource("/" + $stateParams["surveyId"] + "/responses?userId=" + $scope.currentUser.user.id)
+				.then(function(response) {
+					$scope.responses = response.data;
+					initializeResults();
+				});
+			candidateService.getForResource("?surveyId=" + $stateParams["surveyId"])
+				.then(function(response) {
+					$scope.candidates = response.data;
+					initializeResults();
+				});
+			candidateService.getForResource("/responses?surveyId=" + $stateParams["surveyId"])
+				.then(function(response) {
+					$scope.candidateResponses = response.data;
+					initializeResults();
+				});
 		})
 		.controller("CandidatesController", function($scope, $stateParams, RESTFactory) {
 			 // TODO: Get survey/user responses
