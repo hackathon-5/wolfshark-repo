@@ -36,6 +36,14 @@ public class SurveyServiceImpl implements SurveyService {
 	}
 
 	@Override
+	public List<QuestionModel> findQuestionsBySurvey(UUID surveyId) {
+		return context.select(QUESTIONS.fields()).from(SURVEYS)
+				.join(QUESTIONS).on(QUESTIONS.SURVEY_ID.eq(SURVEYS.ID))
+				.where(SURVEYS.ID.eq(surveyId))
+				.fetchInto(QuestionModel.class);
+	}
+
+	@Override
 	public List<QuestionModel> findUnansweredQuestionsBySurveyAndUser(UUID surveyId, UUID userId) {
 		return context.select(QUESTIONS.fields()).from(SURVEYS)
 				.join(QUESTIONS).on(QUESTIONS.SURVEY_ID.eq(SURVEYS.ID))
@@ -44,6 +52,15 @@ public class SurveyServiceImpl implements SurveyService {
 						context.select(RESPONSES.QUESTION_ID).from(RESPONSES).where(RESPONSES.USER_ID.eq(userId))
 				))
 				.fetchInto(QuestionModel.class);
+	}
+
+	@Override
+	public List<AnswerModel> findAnswersBySurvey(UUID surveyId) {
+		return context.select(ANSWERS.fields()).from(SURVEYS)
+				.join(QUESTIONS).on(QUESTIONS.SURVEY_ID.eq(SURVEYS.ID))
+				.join(ANSWERS).on(ANSWERS.QUESTION_ID.eq(QUESTIONS.ID))
+				.where(SURVEYS.ID.eq(surveyId))
+				.fetchInto(AnswerModel.class);
 	}
 
 	@Override

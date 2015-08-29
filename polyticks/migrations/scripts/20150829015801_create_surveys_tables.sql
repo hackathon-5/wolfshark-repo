@@ -1,6 +1,12 @@
 --// create surveys tables
 -- Migration SQL that makes the change goes here.
 
+CREATE TABLE categories(
+	id UUID NOT NULL DEFAULT uuid_generate_v4(),
+	name VARCHAR(128) NOT NULL,
+	PRIMARY KEY(id)
+);
+
 CREATE TABLE surveys(
 	id UUID NOT NULL DEFAULT uuid_generate_v4(),
 	name VARCHAR(128) NOT NULL,
@@ -11,8 +17,10 @@ CREATE TABLE surveys(
 CREATE TABLE questions(
 	id UUID NOT NULL DEFAULT uuid_generate_v4(),
 	survey_id UUID NOT NULL,
+	category_id UUID NOT NULL,
 	text TEXT NOT NULL,
 	PRIMARY KEY(id),
+	FOREIGN KEY (category_id) REFERENCES categories(id),
 	FOREIGN KEY (survey_id) REFERENCES surveys(id)
 );
 
@@ -20,6 +28,7 @@ CREATE TABLE answers(
 	id UUID NOT NULL DEFAULT uuid_generate_v4(),
 	question_id UUID NOT NULL,
 	text TEXT NOT NULL,
+	conservative BOOLEAN NOT NULL,
 	PRIMARY KEY(id),
 	FOREIGN KEY (question_id) REFERENCES questions(id)
 );
@@ -65,3 +74,4 @@ DROP TABLE responses;
 DROP TABLE answers;
 DROP TABLE questions;
 DROP TABLE surveys;
+DROP TABLE categories;

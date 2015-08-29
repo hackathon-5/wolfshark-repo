@@ -37,10 +37,20 @@ public class SurveyRestController extends AbstractRestController {
 		return surveyService.isComplete(surveyId, userId);
 	}
 
+	@RequestMapping(value = "/{surveyId}/questions", method = RequestMethod.GET)
+	public List<QuestionModel> getQuestions(@PathVariable("surveyId") UUID surveyId) {
+		return surveyService.findQuestionsBySurvey(surveyId);
+	}
+
 	@RequestMapping(value = "/{surveyId}/questions/unanswered", method = RequestMethod.GET)
 	public List<QuestionModel> getAllUnansweredQuestions(@PathVariable("surveyId") UUID surveyId,
 														 @RequestParam("userId") UUID userId) {
 		return surveyService.findUnansweredQuestionsBySurveyAndUser(surveyId, userId);
+	}
+
+	@RequestMapping(value = "/{surveyId}/answers", method = RequestMethod.GET)
+	public List<AnswerModel> getAnswers(@PathVariable("surveyId") UUID surveyId) {
+		return surveyService.findAnswersBySurvey(surveyId);
 	}
 
 	@RequestMapping(value = "/{surveyId}/answers/unanswered", method = RequestMethod.GET)

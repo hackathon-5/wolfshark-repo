@@ -150,10 +150,45 @@
 		})
 		.controller("ResultsController", function($scope, $stateParams, RESTFactory) {
 			var surveyService = RESTFactory("surveys");
+			var categoryService = RESTFactory("categories");
 			var candidateService = RESTFactory("candidates");
 
 			var initializeResults = function() {
-				if ($scope.responses && $scope.candidates && $scope.candidateResponses) {
+				if ($scope.responses && $scope.candidates && $scope.candidateResponses && $scope.questions && $scope.answers) {
+					// Determine the layout of responses by category/leaning
+					var categoryForQuestion = _.object(_.map($scope.questions, function(question) {
+						return [question.id, question.categoryId];
+					}));
+					var conservativeByAnswer = _.object(_.map($scope.answers, function(answer) {
+						return [answer.id, answer.conservative];
+					}));
+					var responsesByCategory = _.groupBy($scope.responses, function(response) {
+						return categoryForQuestion[response.questionId];
+					});
+					var leaningByCategory = _.object(_.map(responsesByCategory, function(responses, categoryId) {
+						var total = responses.length;
+						var withoutUndecided = _.reject(responses, function(response) { return response.text === "Undecided" });
+						var leanings = _.partition(withoutUndecided, function(response) { return conservativeByAnswer[response.answerId]; });
+
+						var leaning = (leanings[0].length === leanings[1].length) ? "moderate" :
+							(leanings[0].length > leanings[1].length) ? "conservative" : "liberal";
+						var percent = undefined;
+
+						if (leaning === "conservative") {
+							percent = Math.ceil((leaning[0].length / $scope.questions.length) * 100);
+						} else {
+							percent = Math.ceil((leaning[1].length / $scope.questions.length) * 100);
+						}
+
+						return [categoryId, {
+							total: total,
+							percent: percent,
+							leaning: leaning
+						}];
+					}));
+
+					$scope.leaningByCategory = leaningByCategory;
+
 					var answersByCandidate = _.object(_.map(_.groupBy($scope.candidateResponses, "candidateId"),
 						function(responses, candidateId) {
 						return [candidateId, responses.map(function(response) {
@@ -183,6 +218,14 @@
 					$scope.responses = response.data;
 					initializeResults();
 				});
+			surveyService.getForResource("/" + $stateParams["surveyId"] + "/questions")
+				.then(function(response) {
+					$scope.questions = response.data;
+				});
+			surveyService.getForResource("/" + $stateParams["surveyId"] + "/answers")
+				.then(function(response) {
+					$scope.answers = response.data;
+				});
 			candidateService.getForResource("?surveyId=" + $stateParams["surveyId"])
 				.then(function(response) {
 					$scope.candidates = response.data;
@@ -192,6 +235,10 @@
 				.then(function(response) {
 					$scope.candidateResponses = response.data;
 					initializeResults();
+				});
+			categoryService.getForResource("")
+				.then(function(response) {
+					$scope.categories = response.data;
 				});
 		})
 		.controller("CandidatesController", function($scope, $stateParams, RESTFactory) {

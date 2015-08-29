@@ -8,6 +8,7 @@ import java.util.UUID;
 public class QuestionModel {
 	private UUID id;
 	private UUID surveyId;
+	private UUID categoryId;
 	private String text;
 
 	public UUID getId() {
@@ -24,6 +25,14 @@ public class QuestionModel {
 
 	public void setSurveyId(UUID surveyId) {
 		this.surveyId = surveyId;
+	}
+
+	public UUID getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(UUID categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getText() {

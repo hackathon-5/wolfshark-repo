@@ -8,6 +8,7 @@ import java.util.UUID;
 public class AnswerModel {
 	private UUID id;
 	private UUID questionId;
+	private boolean conservative;
 	private String text;
 
 	public UUID getId() {
@@ -24,6 +25,14 @@ public class AnswerModel {
 
 	public void setQuestionId(UUID questionId) {
 		this.questionId = questionId;
+	}
+
+	public boolean isConservative() {
+		return conservative;
+	}
+
+	public void setConservative(boolean conservative) {
+		this.conservative = conservative;
 	}
 
 	public String getText() {
