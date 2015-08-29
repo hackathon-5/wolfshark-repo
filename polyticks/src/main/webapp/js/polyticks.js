@@ -104,6 +104,8 @@
 					if ($scope.questions.length === 0) {
 						$state.go("results", {surveyId: $stateParams["surveyId"]});
 					}
+
+					$scope.responses = new Array($scope.questions.length);
 				}
 			};
 			var completeSurvey = function() {
@@ -114,12 +116,14 @@
 
 			$scope.questionIndex = 0;
 			$scope.answerQuestion = function(answer) {
-				$scope.questionIndex++;
 				var response = {
 					userId: $scope.currentUser.user.id,
 					answerId: answer.id,
 					questionId: answer.questionId
 				};
+
+				$scope.responses[$scope.questionIndex] = answer.text;
+				$scope.questionIndex++;
 
 				surveyService.postForResource("/" + $stateParams["surveyId"] + "/response", response)
 					.then(function() {
