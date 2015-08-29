@@ -18,6 +18,10 @@
 					url: "/login",
 					templateUrl: "/html/login.html"
 				})
+				.state("survey", {
+					url: "/survey/:surveyId",
+					templateUrl: "/html/survey.html"
+				})
 				;
 		});
 
@@ -74,6 +78,27 @@
 		})
 		.controller("LoginController", function($scope) {
 
+		})
+		.controller("SurveyController", function ($scope, $stateParams, RESTFactory) {
+			var surveyService = RESTFactory("surveys");
+
+			var initializeSurvey = function() {};
+
+			surveyService.getForResource("/" + $stateParams["surveyId"])
+				.then(function(response) {
+					$scope.survey = response.data;
+					initializeSurvey();
+				});
+			surveyService.getForResource("/" + $stateParams["surveyId"] + "/questions/unanswered?userId" + $scope.currentUser.user.id)
+				.then(function(response) {
+					$scope.questions = response.data;
+					initializeSurvey();
+				});
+			surveyService.getForResource("/" + $stateParams["surveyId"] + "/answers/unanswered?userId" + $scope.currentUser.user.id)
+				.then(function (response) {
+					$scope.answers = response.data;
+					initializeSurvey();
+				});
 		})
 		;
 })(angular, _);
