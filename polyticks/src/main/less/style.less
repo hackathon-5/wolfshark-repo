@@ -84,7 +84,6 @@ h4 {
 	line-height: 1.2em;
 	position: relative;
 	display: inline-block;
-	background: @white;
 	
 	&:before {
 		content: "";
@@ -171,7 +170,7 @@ h5 {
 }
 
 #wrapContent {
-	padding-top: 6em;
+	padding-top: 9em;
 	padding-bottom: 3em;
 	min-height: 100vh;
 }
@@ -415,6 +414,39 @@ h5 {
 	
 }
 
+
+/***** SURVEYS *****/
+
+#surveys {
+	text-align: center;
+
+	h1 {
+		font-size: 300%;
+		margin-bottom: 1em;
+	}
+
+	.survey-card {
+		display: inline-block;
+		vertical-align: top;
+		min-height: 12em;
+		margin: 0 -.2em;
+		float: none;
+		
+		.inner {
+			background: fade(#fff,50%);
+			padding: 2em;
+			
+			h2 {
+				text-transform: uppercase;
+				letter-spacing: .1em;
+				color: @blue;
+				font-size: 135%;
+				line-height: 1.2em;
+				margin-top: 0;
+			}
+		}
+	}
+}
 
 
 /***** SURVEY *****/
