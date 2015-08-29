@@ -13,7 +13,12 @@
 				.state("index", {
 					url: "/",
 					templateUrl: "/html/index.html"
-				});
+				})
+				.state("login", {
+					url: "/login",
+					templateUrl: "/html/login.html"
+				})
+				;
 		});
 
 	polyticksModule
@@ -22,5 +27,9 @@
 		})
 		.controller("IndexController", function($scope) {
 
-		});
+		})
+		.controller("LoginController", function($scope) {
+
+		})
+		;
 })(angular, _);

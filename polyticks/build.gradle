@@ -79,6 +79,20 @@ dependencies {
 	compile "org.springframework:spring-orm:${springVersion}"
 	compile "org.springframework:spring-oxm:${springVersion}"
 
+	// Spring Security
+	compile "org.springframework.security:spring-security-core:${springSecurityVersion}"
+	compile "org.springframework.security:spring-security-web:${springSecurityVersion}"
+	compile "org.springframework.security:spring-security-config:${springSecurityVersion}"
+
+	// Spring Social
+	compile "org.springframework.social:spring-social-core:${springSocialVersion}"
+	compile "org.springframework.social:spring-social-config:${springSocialVersion}"
+	compile "org.springframework.social:spring-social-web:${springSocialVersion}"
+	compile "org.springframework.social:spring-social-security:${springSocialVersion}"
+	compile "org.springframework.social:spring-social-facebook:2.0.2.RELEASE"
+
+//	compile "org.springframework.social:spring-social-linkedin:1.0.1.RELEASE"
+
 	// jOOQ
 	compile "org.postgresql:postgresql:9.3-1102-jdbc41"
 	compile "org.jooq:jooq:${jooqVersion}"

@@ -22,8 +22,8 @@ import us.hexcoder.twirl.view.TwirlView;
  */
 @Configuration
 @EnableWebMvc
-@Import({PersistenceConfiguration.class})
-@ComponentScan({"us.hexcoder.polyticks"})
+@Import({PersistenceConfiguration.class, SecurityConfiguration.class, SocialConfiguration.class})
+@ComponentScan({"us.hexcoder.polyticks.controller", "us.hexcoder.polyticks.service"})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 	private static final String APPLICATION_ENVIRONMENT_VARIABLE = "APP_ENV";
 	private static final String PROPERTY_ENCRYPTION_ALGORITHM = "PBEWithMD5AndDES";

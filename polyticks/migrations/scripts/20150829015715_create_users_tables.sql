@@ -3,7 +3,7 @@
 
 CREATE TABLE users (
 	id UUID NOT NULL DEFAULT uuid_generate_v4(),
-	email VARCHAR(256) NOT NULL,
+	username VARCHAR(256) NOT NULL,
 	full_name VARCHAR(256) NOT NULL,
 	inserted_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (id)
