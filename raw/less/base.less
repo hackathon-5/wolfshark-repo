@@ -2,9 +2,10 @@
 
 @gold: #deb408;
 @red: #991111;
-@blue: #000077;
+@blue: #227288;
 @white: #eeeae0;
-@brown: #7d3b00;
+@brown: #533416;
+@green: #5ea429;
 
 .fa-icon(@content) {
 	content: @content;
@@ -20,6 +21,7 @@
 
 html, body {
 	background: @white;
+	font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
 }
 .container-narrow {
 	max-width: 320px;
@@ -39,6 +41,25 @@ html, body {
 	}
 }
 
+#wrapHeader {
+	position: relative;
+	background: @blue url(../img/bg-header.jpg) no-repeat 50% 100%;
+	padding-top: 1.375em;
+
+	.logo {
+		width: 13em;
+		height: 1em;
+		display: block;
+		text-indent: -9999px;
+		background: url(../img/logo.png) no-repeat 50% 50%;
+		background-size: contain;
+		margin-left: -6.5em;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		font-size: 150%;
+	}
+}
 
 .form-group.textbox {
 	
@@ -165,4 +186,85 @@ html, body {
 }
 
 
+
+/***** SURVEY *****/
+
+.survey-item {
+	
+	.survey-question {
+		color: @brown;
+		text-align: center;
+		font-size: 250%;
+		margin-bottom: 1em;
+	}
+	
+	.survey-answers {
+		.form-group {
+			width: 42%;
+			margin: 3%;
+			display: inline-block;
+			vertical-align: top;
+			
+			input {
+				display: none;
+				
+				+ label {
+					display: block;
+					border: .125em solid #fff;
+					border-radius: .5em;
+					padding: 1em;
+					text-align: center;
+					color: #fff;
+					font-size: 200%;
+					font-weight: 500;
+					cursor: pointer;
+				}
+				&.no {
+					+ label {
+						color: @red;
+						border-color: @red;
+						&:before {
+							.fa-icon("\f00d");
+							display: block;
+							margin: 0 auto;
+						}
+					}
+					&:checked + label {
+						background: @red;
+						color: @white;
+					}
+				}
+				&.yes {
+					+ label {
+						color: @green;
+						border-color: @green;
+						&:before {
+							.fa-icon("\f00c");
+							display: block;
+							margin: 0 auto;
+						}
+					}
+					&:checked + label {
+						background: @green;
+						color: @white;
+					}
+				}
+				&.undecided {
+					+ label {
+						color: @blue;
+						border-color: transparent;
+					}
+					&:checked + label {
+						background: @blue;
+						color: @white;
+						border-color: @blue;
+					}
+				}
+			}
+			&:last-child {
+				width: 90%;				
+			}
+		}
+	}
+}
 
