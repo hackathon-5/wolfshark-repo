@@ -1,15 +1,28 @@
-<section class="container container-narrow" id="survey" ng-controller="SurveyController" ng-if="currentUser">
-	<article class="survey-item">
-		<h2 class="survey-question">{{ questions[questionIndex].text }}</h2>
-		<div class="survey-answers">
+<section class="container" id="survey" ng-controller="SurveyController" ng-if="currentUser">
+	<div class="survey-questions container container-narrow">
+		<article class="survey-item" ng-repeat="question in questions" ng-class="{ 'active-question': $index == questionIndex , 'finished-question': $index < questionIndex }">
+			<h2 class="survey-question">{{ question.text }}</h2>
+			<div class="survey-answers">
 
-
-			<div class="form-group radio" ng-repeat="answer in answersByQuestion[questions[questionIndex].id]">
-				<input type="radio" id="answer-disagree" ng-click="answerQuestion(answer)" name="question" />
-				<label for="answer-disagree"  ng-click="answerQuestion(answer)">{{ answer.text }}</label>
+				<div class="form-group radio" ng-repeat="answer in answersByQuestion[questions[questionIndex].id]">
+					<input type="radio" class="{{ answer.text.toLowerCase() }}" id="{{ answer }}" ng-click="answerQuestion(answer)" name="question" />
+					<label for="{{ answer }}" ng-click="answerQuestion(answer)">{{ answer.text }}</label>
+				</div>
 			</div>
-		</div>
-	</article>
+		</article>
+	</div>
+	
+	<!-- TODO: Delete this sample block. Used for styling. -->
+	<footer class="survey-progress">
+		<ul class="status container">
+			<li class="finished yes">Yes</li>
+			<li class="finished no">Yes</li>
+			<li class="finished no">Yes</li>
+			<li class="finished yes">Yes</li>
+			<li class="finished neutral">Yes</li>
+			<li class=""></li>
+		</ul>
+	</footer>
 
 	<footer class="survey-progress" style="display: none;">
 		<ul>

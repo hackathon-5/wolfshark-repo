@@ -16,19 +16,20 @@
 	<body ng-controller="RootController">
 		<header id="wrapHeader">
 			<div class="logo"><a href="/">Polyticks</a></div>
-			<nav id="main-nav">
-				<a class="hidden-md hidden-lg menu-toggle"></a>
-				<ul class="menu">
-					<li class="profile"><a href="#profile">Profile</a></li>
-					<li class="survey"><a href="#survey">Survey</a></li>
-					<li class="results"><a href="#results">Results</a></li>
-				</ul>
-			</nav>
 		</header>
 
 		<main id="wrapContent" ui-view></main>
 
-		<footer id="wrapFooter"></footer>
+		<footer id="wrapFooter">
+			<nav id="main-nav">
+				<a class="hidden-md hidden-lg menu-toggle"></a>
+				<ul class="menu">
+					<li class="profile"><a href="#profile">Profile</a></li>
+					<li class="candidates"><a href="#candidates">Candidates</a></li>
+					<li class="issues"><a href="#issues">Issues</a></li>
+				</ul>
+			</nav>
+		</footer>
 	</body>
 
 	<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

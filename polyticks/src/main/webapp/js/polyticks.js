@@ -26,6 +26,14 @@
 					url: "/surveys/:surveyId/results",
 					templateUrl: "/html/results.html"
 				})
+				.state("candidates", {
+					   url: "/surveys/:surveyId/candidates",
+					   templateUrl: "/html/candidates.html"
+			    })
+				.state("issues", {
+					   url: "/surveys/:surveyId/issues",
+					   templateUrl: "/html/issues.html"
+ 			    })
 				;
 		});
 
@@ -135,6 +143,20 @@
 			// TODO: Get candidate responses
 
 			// TODO: Calculate comparison to candidates vs. user
+		})
+		.controller("CandidatesController", function($scope, $stateParams, RESTFactory) {
+			 // TODO: Get survey/user responses
+			 // TODO: Get candidates
+			 // TODO: Get candidate responses
+			 
+			 // TODO: Calculate comparison to candidates vs. user
+		})
+		.controller("IssuesController", function($scope, $stateParams, RESTFactory) {
+			 // TODO: Get survey/user responses
+			 // TODO: Get candidates
+			 // TODO: Get candidate responses
+			 
+			 // TODO: Calculate comparison to candidates vs. user
 		})
 		;
 })(angular, _);
