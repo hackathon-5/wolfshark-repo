@@ -53,6 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(
 						"/",
 						"/auth/**",
+						"/rest/users/current",
 						"/signin/**"
 				).permitAll()
 				.antMatchers("/**").hasAuthority(Role.ROLE_SYSTEM_USER.toString())

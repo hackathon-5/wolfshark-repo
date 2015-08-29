@@ -7,7 +7,6 @@ import java.util.UUID;
  */
 public class UserModel {
 	private UUID id;
-	private String email;
 	private String username;
 	private String fullName;
 
@@ -17,14 +16,6 @@ public class UserModel {
 
 	public void setId(UUID id) {
 		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getUsername() {

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import us.hexcoder.polyticks.constant.Provider;
 import us.hexcoder.polyticks.constant.Role;
 import us.hexcoder.polyticks.dto.SocialUserDetails;
@@ -33,11 +34,34 @@ import static us.hexcoder.polyticks.jooq.Tables.USERS_CONNECTIONS;
  * Created by 67726e on 8/28/15.
  */
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private DSLContext context;
 
 	@Override
+	public Optional<UUID> findCurrentUserId() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if (authentication != null && authentication.getPrincipal() instanceof SocialUserDetails) {
+			SocialUserDetails details = (SocialUserDetails) authentication.getPrincipal();
+			return Optional.of(details.getId());
+		}
+
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<UserDTO> findCurrentUserDTO() {
+		return findCurrentUserId()
+				.map(userId -> context.select().from(USERS)
+						.join(USERS_CONNECTIONS).on(USERS_CONNECTIONS.USER_ID.eq(USERS.ID))
+						.fetchOne())
+				.map(record -> record.map(USER_DTO_MAPPER));
+	}
+
+	@Override
+	@Transactional(readOnly = false)
 	public UserModel socialSignup(Connection<?> connection) {
 		UserProfile profile = connection.fetchUserProfile();
 

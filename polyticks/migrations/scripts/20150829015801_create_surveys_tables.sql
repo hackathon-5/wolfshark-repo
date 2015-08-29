@@ -27,9 +27,11 @@ CREATE TABLE answers(
 CREATE TABLE responses(
 	id UUID NOT NULL DEFAULT uuid_generate_v4(),
 	answer_id UUID NOT NULL,
+	question_id UUID NOT NULL,
 	user_id UUID NOT NULL,
 	PRIMARY KEY(id),
 	FOREIGN KEY (answer_id) REFERENCES answers(id),
+	FOREIGN KEY (question_id) REFERENCES questions(id),
 	FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
