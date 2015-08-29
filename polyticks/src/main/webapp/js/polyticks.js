@@ -18,10 +18,14 @@
 					url: "/login",
 					templateUrl: "/html/login.html"
 				})
-				.state("survey", {
-					url: "/surveys/:surveyId",
-					templateUrl: "/html/survey.html"
+				.state("surveys", {
+					url: "/surveys/",
+					templateUrl: "/html/surveys.html"
 				})
+				.state("survey", {
+					   url: "/surveys/:surveyId",
+					   templateUrl: "/html/survey.html"
+					   })
 				.state("results", {
 					url: "/surveys/:surveyId/results",
 					templateUrl: "/html/results.html"
